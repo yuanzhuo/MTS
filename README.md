@@ -1,26 +1,68 @@
-# MTS (Multi-Task Scheduler) 
-MTS is a bash-level scheduler, which can be used to distribute and run a bunch of tasks with HPC CPU (and/or GPU) resources allocated by OLNLY ONE Slurm run. 
-It was inspired by [MTEAQ](https://github.com/evanberkowitz/metaq), which uses folders and files to identify and detect job status. MTS is easly to setup and can be also used on laptop. 
+# **MTS (Multi-Task Scheduler)**  
 
-## User Guide
-### Overvies
-- git clone this repository to your local device or HPC folder
-- Add "-x" authority to all the *.sh files, like `chmod -x *.sh`
-- Modify "MTS_GenerateTasks.sh" and generate task path and exec names by `./MTS_GenerateTasks.sh`
-- Run "MTS_Initial.sh" to initialize the MTS_folder, by `./MTS_Initial.sh`
-- Modify "slurm_Run.sh" according to your own systems
-- Submit slurm command by `sbatch slurm_Run.sh`
-- Check job running status by `./MTS_Check.sh`
+**MTS** is a lightweight bash-based task scheduler designed to distribute and manage multiple tasks efficiently using HPC resources (CPU/GPU) allocated through **a single Slurm job**.  
+Inspired by [MTEAQ](https://github.com/evanberkowitz/metaq), MTS simplifies task management by leveraging a file-based system to track job status. It is **easy to set up** and can even be used on local machines (e.g., laptops).  
 
-### More about MTS 
-- "MTS_GenerateTasks.sh" will generate a file "MTS_Tasks.task". The task format is "task_# | task_path | task_executive_name". One can also modify "MTS_Tasks.task" manually.
-- "Check_Mode": If one want to check if all the path is okay, one can uncommant `export MTS_EXE_COMMAND="echo \"$cmd\" ` in "slurm_Run.sh"
-- About MTS variables (export in slurm_Run.sh):
- - MTS_MAX_CONCURRENT: Max parallel running tasks number
- - MTS_NODES_PER_TASK: Number of nodes per task
- - MTS_THREAD_PER_Node: Number of threads on each node
- - MTS_NTASK_PER_GPU: ntask per gpu also can be changed to NGPU_PER_TASK
- - cmd is the real command which pass to slurm
+---
 
-For more informations one can find email at [here](https://yuanzhuo.github.io/) 
- 
+## **User Guide**  
+
+### **Overview**  
+1. **Clone the repository**:  
+   ```bash
+   git clone https://github.com/your-repo/MTS.git
+   cd MTS
+   ```  
+2. **Grant execute permissions**:  
+   ```bash
+   chmod +x *.sh
+   ```  
+3. **Generate tasks**:  
+   Modify `MTS_GenerateTasks.sh` and run it to create task definitions:  
+   ```bash
+   ./MTS_GenerateTasks.sh
+   ```  
+4. **Initialize MTS**:  
+   ```bash
+   ./MTS_Initial.sh
+   ```  
+5. **Configure Slurm**:  
+   Edit `slurm_Run.sh` to match your HPC system’s requirements.  
+6. **Submit the job**:  
+   ```bash
+   sbatch slurm_Run.sh
+   ```  
+7. **Monitor progress**:  
+   ```bash
+   ./MTS_Check.sh
+   ```  
+
+---
+
+### **Advanced Configuration**  
+
+#### **Task File Format**  
+`MTS_GenerateTasks.sh` generates `MTS_Tasks.task` with the following structure:  
+```plaintext
+task_# | task_path | task_executable_name
+```  
+You may edit this file manually if needed.  
+
+#### **Check Mode**  
+To validate paths without execution, uncomment this line in `slurm_Run.sh`:  
+```bash
+export MTS_EXE_COMMAND="echo \"$cmd\""
+```  
+
+#### **Key Environment Variables**  
+Configure these in `slurm_Run.sh`:  
+- `MTS_MAX_CONCURRENT`: Maximum parallel tasks.  
+- `MTS_NODES_PER_TASK`: Nodes allocated per task.  
+- `MTS_THREADS_PER_NODE`: Threads per node.  
+- `MTS_NTASK_PER_GPU`: Tasks per GPU (or `NGPU_PER_TASK` for GPU count).  
+- `cmd`: The actual Slurm command executed for each task.  
+
+---
+
+### **Support**  
+For questions or issues, please find contact [here](https://yuanzhuo.github.io/)  
