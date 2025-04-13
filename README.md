@@ -9,7 +9,8 @@ It was inspired by [MTEAQ](https://github.com/evanberkowitz/metaq), which uses f
 - Modify "MTS_GenerateTasks.sh" and generate task path and exec names by `./MTS_GenerateTasks.sh`
 - Run "MTS_Initial.sh" to initialize the MTS_folder, by `./MTS_Initial.sh`
 - Modify "slurm_Run.sh" according to your own systems
-- submit slurm command by `sbatch slurm_Run.sh`
+- Submit slurm command by `sbatch slurm_Run.sh`
+- Check job running status by `./MTS_Check.sh`
 
 ### More about MTS variables
 
