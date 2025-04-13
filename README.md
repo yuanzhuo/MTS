@@ -12,6 +12,7 @@ It was inspired by [MTEAQ](https://github.com/evanberkowitz/metaq), which uses f
 - Submit slurm command by `sbatch slurm_Run.sh`
 - Check job running status by `./MTS_Check.sh`
 
-### More about MTS variables
-
+### More about MTS 
+- "MTS_GenerateTasks.sh" will generate a file "MTS_Tasks.task". The task format is "task_# | task_path | task_executive_name". One can also modify "MTS_Tasks.task" manually.
+- "Check_Mode": If one want to check if all the path is okay, one can uncommant `export MTS_EXE_COMMAND="echo \"$cmd\" `
  
